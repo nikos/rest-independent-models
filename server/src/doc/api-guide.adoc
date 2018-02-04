@@ -1,0 +1,117 @@
+= RESTful Customers API Guide
+Niko Schmuck;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+
+[[overview]]
+= Overview
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+RESTful customers tries to adhere as closely as possible to standard HTTP and REST conventions in
+its use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview-http-status-codes]]
+== HTTP status codes
+
+RESTful customers tries to adhere as closely as possible to standard HTTP and REST conventions in
+its use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+[[overview-errors]]
+== Errors
+
+Whenever an error response (status code >= 400) is returned, the body will contain a JSON object
+that describes the problem. The error object has the following structure:
+
+include::{snippets}/error-example/response-fields.adoc[]
+
+For example, a request that attempts to apply a non-existent tag to a customer will produce a
+`400 Bad Request` response:
+
+include::{snippets}/error-example/http-response.adoc[]
+
+
+[[resources]]
+= Resources
+
+
+[[resources-customers]]
+== Customers
+
+The Customers resources is used to create and list customers.
+
+
+[[resources-customers-list]]
+=== Listing customers
+
+A `GET` request will list all of the service's customers.
+
+operation::customers-list-example[snippets='response-fields,curl-request,http-response']
+
+
+
+[[resources-customers-create]]
+=== Creating a customer
+
+A `POST` request is used to create a customer.
+
+operation::customers-create-example[snippets='request-fields,curl-request,http-response']
+
+
+
+[[resources-customer-retrieve]]
+=== Retrieve a customer
+
+A `GET` request will retrieve the details of a customer.
+
+operation::customer-get-example[snippets='response-fields,curl-request,http-response']
+
+
+
+
+[[resources-customer-delete]]
+=== Delete a customer
+
+A `DELETE` request can be used to delete a customer.
+
+operation::customer-delete-example[snippets='response-fields,curl-request,http-response']
