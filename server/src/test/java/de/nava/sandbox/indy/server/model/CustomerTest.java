@@ -20,6 +20,7 @@ public class CustomerTest {
 
   @Before
   public void setUp() {
+    // Simulate Jackson mapper as set up by default in Spring Boot
     objectMapper = new ObjectMapper()
       .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
   }
@@ -27,12 +28,12 @@ public class CustomerTest {
   @Test
   public void shouldTolerateUnknownJsonProperty() throws IOException {
     String jsonAsString =
-      "{\"id\":42, \"firstname\": \"Ada\", \"lastname\": \"Lovelace\", \"foo\": \"bar\"}";
+      "{\"id\":42, \"firstname\": \"Ada\", \"lastname\": \"Lovelace\", \"details\": {\"ref\": \"...\", \"created\": \"2018-02-05\"}, \"foo\": \"bar\"}";
 
     Customer customer = objectMapper.readValue(jsonAsString, Customer.class);
 
     assertThat(customer).isNotNull();
-    LOG.info("Deserialized: {} ", customer);
+    LOG.info("Deserialized into: {} ", customer);
   }
 
 }

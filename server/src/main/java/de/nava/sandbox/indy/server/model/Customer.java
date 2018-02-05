@@ -1,5 +1,6 @@
 package de.nava.sandbox.indy.server.model;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import de.nava.sandbox.indy.server.model.Customer.CustomerBuilder;
@@ -18,7 +19,7 @@ public final class Customer {
   private final Long id;
   @NotNull private final String firstname;
   @NotNull private final String lastname;
-
+  private final JsonNode details;
 
   @JsonPOJOBuilder(withPrefix = "")
   public static final class CustomerBuilder {
