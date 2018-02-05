@@ -73,8 +73,9 @@ cd client
 ## Built With
 
 * [Spring Boot](https://projects.spring.io/spring-boot/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
+* [Spring REST Docs](https://docs.spring.io/spring-restdocs/docs/current/reference/html5/) - Spring REST Docs for testing and creating documentation
 * [Lombok](https://projectlombok.org/) - Avoid boiler-plate code
+* [Maven](https://maven.apache.org/) - Dependency Management of libraries
 
 
 ## Authors

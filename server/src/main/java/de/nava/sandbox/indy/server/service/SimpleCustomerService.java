@@ -1,5 +1,6 @@
 package de.nava.sandbox.indy.server.service;
 
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import de.nava.sandbox.indy.server.model.Customer;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,10 @@ public class SimpleCustomerService implements CustomerService {
   private static final Map<Long, Customer> CUSTOMERS = new ConcurrentHashMap<>();
 
   static {
-    CUSTOMERS.put(42L, Customer.builder().id(42L).firstname("Ada").lastname("Lovelace").build());
-    CUSTOMERS.put(43L, Customer.builder().id(43L).firstname("Grace").lastname("Hopper").build());
+    CUSTOMERS.put(42L, Customer.builder().id(42L).firstname("Ada").lastname("Lovelace")
+      .details(JsonNodeFactory.instance.objectNode().put("ref", "0815")).build());
+    CUSTOMERS.put(43L, Customer.builder().id(43L).firstname("Grace").lastname("Hopper")
+      .details(JsonNodeFactory.instance.objectNode().put("ref", "0816")).build());
   }
 
   @Override

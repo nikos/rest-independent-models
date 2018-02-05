@@ -83,8 +83,6 @@ public class ApiDocumentation {
     //subsectionWithPath("_links").description("<<resources-tags-list-links, Links>> to other resources"))));
   }
 
-  // ~~~ Baeldung
-
   @Test
   public void customerGetExample() throws Exception {
 
@@ -94,9 +92,10 @@ public class ApiDocumentation {
         preprocessRequest(prettyPrint()),
         preprocessResponse(prettyPrint()),
         responseFields(
-          fieldWithPath("id").description("The id of the input"),
-          fieldWithPath("firstname").description("The title of the input"),
-          fieldWithPath("lastname").description("The body of the input")
+          fieldWithPath("id").description("The id of the customer"),
+          fieldWithPath("firstname").description("The first name of the customer"),
+          fieldWithPath("lastname").description("The last name of the customer"),
+          subsectionWithPath("details").description("Details of the customer")
         )
       ));
   }
@@ -105,17 +104,18 @@ public class ApiDocumentation {
   public void customerCreateExample() throws Exception {
     Map<String, Object> crud = new HashMap<>();
     crud.put("id", 2L);
-    crud.put("firstname", "Sample Model");
-    crud.put("lastname", "http://www.nava.de/");
+    crud.put("firstname", "Ada");
+    crud.put("lastname", "Lovelace");
 
     mockMvc.perform(post("/api/customers").contentType(MediaType.APPLICATION_JSON)
       .content(objectMapper.writeValueAsString(crud)))
       .andExpect(status().isCreated())
-      .andDo(document("customer-create-example", preprocessRequest(prettyPrint()),
+      .andDo(document("customers-create-example", preprocessRequest(prettyPrint()),
         preprocessResponse(prettyPrint()),
-        requestFields(fieldWithPath("id").description("The id of the input"),
-          fieldWithPath("firstname").description("The title of the input"),
-          fieldWithPath("lastname").description("The body of the input")
+        requestFields(
+          fieldWithPath("id").description("The id of the customer"),
+          fieldWithPath("firstname").description("The first name of the customer"),
+          fieldWithPath("lastname").description("The last name of the customer")
         )
       ));
   }
@@ -124,8 +124,8 @@ public class ApiDocumentation {
   public void customerDeleteExample() throws Exception {
     Map<String, Object> customer = new HashMap<>();
     customer.put("id", 23L);
-    customer.put("firstname", "Sample Model");
-    customer.put("lastname", "http://www.nava.de/");
+    customer.put("firstname", "Ada");
+    customer.put("lastname", "Lovelace");
 
     mockMvc.perform(post("/api/customers").contentType(MediaType.APPLICATION_JSON)
       .content(objectMapper.writeValueAsString(customer)))
@@ -134,7 +134,7 @@ public class ApiDocumentation {
     mockMvc.perform(delete("/api/customers/{id}", 23))
       .andExpect(status().isOk())
       .andDo(document("customer-delete-example",
-        pathParameters(parameterWithName("id").description("The id of the input to delete"))
+        pathParameters(parameterWithName("id").description("The id of the customer to delete"))
       ));
   }
 
